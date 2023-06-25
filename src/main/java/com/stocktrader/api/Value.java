@@ -2,7 +2,7 @@ package com.stocktrader.api;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+//@Generated("jsonschema2pojo")
 public class Value {
 
     @SerializedName("datetime")

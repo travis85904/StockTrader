@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 public class StocksApplication extends Application {
 
+    private static Stage mainStage;
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
@@ -16,13 +17,19 @@ public class StocksApplication extends Application {
         stage.setTitle("Baskeldo Stonks Trader");
         stage.setScene(scene);
         stage.show();
+        mainStage = stage;
     }
 
-    public static void showAlert(String alertText){
+    public static void showAlert(String alertText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(alertText);
         alert.show();
     }
+
+    public static Stage getStage(){
+        return mainStage;
+    }
+
 }
 
 

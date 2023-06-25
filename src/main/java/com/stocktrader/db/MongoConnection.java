@@ -13,9 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+//
+//FOR TESTING PURPOSES ONLY
+//
+//
 public class MongoConnection {
     public static void main(String[] args) throws IOException {
         String user = "another ser";
+
 
         Properties properties = new Properties();
         try {

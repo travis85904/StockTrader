@@ -8,10 +8,12 @@ module com.stocks.stocktrader {
     requires org.mongodb.bson;
 
     opens com.stocktrader to javafx.fxml;
-    opens com.stocktrader.api to javafx.fxml;
+    opens com.stocktrader.api to javafx.fxml, com.google.gson;
     opens com.stocktrader.db to javafx.fxml;
     exports com.stocktrader;
     exports com.stocktrader.api;
     exports com.stocktrader.db;
+    exports com.stocktrader.controllers;
+    opens com.stocktrader.controllers to javafx.fxml;
 
 }

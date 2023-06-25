@@ -3,7 +3,7 @@ package com.stocktrader.api;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+//@Generated("jsonschema2pojo")
 public class TimeSeries {
 
     @SerializedName("meta")

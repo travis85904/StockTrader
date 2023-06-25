@@ -6,9 +6,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.stocktrader.StocksApplication;
-import javafx.scene.control.Alert;
 import org.bson.Document;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,13 +29,16 @@ public class UserAuth {
             MongoDatabase db = mongoClient.getDatabase("db");
             MongoCollection<Document> collection = db.getCollection("users");
             Document doc = collection.find(Filters.eq("username", userName)).first();
-            System.out.println(doc.get("password"));
             if (doc.get("password").equals(password)) {
                 System.out.println("authentication successful");
                 return true;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            StocksApplication.showAlert("Invalid Password");
+            return false;
         }
-        StocksApplication.showAlert("Invalid Password");
+
         return false;
     }
 

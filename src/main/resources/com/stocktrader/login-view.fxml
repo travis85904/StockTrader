@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stocktrader.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stocktrader.controllers.LoginViewController">
    <children>
       <ImageView fitHeight="455.0" fitWidth="328.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,7 +22,7 @@
          </font>
       </Text>
       <TextField fx:id="usernameField" layoutX="466.0" layoutY="188.0" prefHeight="25.0" prefWidth="182.0" />
-      <PasswordField fx:id="passwordField" layoutX="466.0" layoutY="264.0" prefHeight="25.0" prefWidth="182.0" />
+      <PasswordField fx:id="passwordField" layoutX="466.0" layoutY="264.0" prefHeight="25.0" prefWidth="182.0" onKeyPressed="#loginFieldKeyListener"/>
       <Button fx:id="loginButton" layoutX="466.0" layoutY="327.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="31.0" prefWidth="57.0" text="Login" />
       <Button fx:id="forgotPasswordButton" layoutX="559.0" layoutY="327.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="109.0" text="Forgot password" />
       <Text fx:id="usernameText" layoutX="466.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
