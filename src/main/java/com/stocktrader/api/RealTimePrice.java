@@ -1,2 +1,7 @@
 package com.stocktrader.api;
-public record RealTimePrice (String price){ }
+
+import java.io.IOException;
+
+public record RealTimePrice (String price){
+
+}

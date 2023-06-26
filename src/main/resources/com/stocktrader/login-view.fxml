@@ -21,8 +21,8 @@
             <Font name="Comic Sans MS" size="40.0" />
          </font>
       </Text>
-      <TextField fx:id="usernameField" layoutX="466.0" layoutY="188.0" prefHeight="25.0" prefWidth="182.0" />
-      <PasswordField fx:id="passwordField" layoutX="466.0" layoutY="264.0" prefHeight="25.0" prefWidth="182.0" onKeyPressed="#loginFieldKeyListener"/>
+      <TextField fx:id="usernameField" layoutX="466.0" layoutY="188.0" onKeyPressed="#loginFieldKeyListener" prefHeight="25.0" prefWidth="182.0" />
+      <PasswordField fx:id="passwordField" layoutX="466.0" layoutY="264.0" onKeyPressed="#loginFieldKeyListener" prefHeight="25.0" prefWidth="182.0" />
       <Button fx:id="loginButton" layoutX="466.0" layoutY="327.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="31.0" prefWidth="57.0" text="Login" />
       <Button fx:id="forgotPasswordButton" layoutX="559.0" layoutY="327.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="109.0" text="Forgot password" />
       <Text fx:id="usernameText" layoutX="466.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
@@ -35,5 +35,6 @@
             <Font size="21.0" />
          </font>
       </Text>
+      <Button fx:id="registerButton" layoutX="466.0" layoutY="374.0" mnemonicParsing="false" onAction="#register" prefHeight="38.0" prefWidth="133.0" text="New user registration" />
    </children>
 </AnchorPane>

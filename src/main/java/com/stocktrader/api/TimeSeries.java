@@ -1,8 +1,10 @@
 package com.stocktrader.api;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 //@Generated("jsonschema2pojo")
 public class TimeSeries {
 
@@ -18,13 +20,11 @@ public class TimeSeries {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public TimeSeries() {
     }
 
     /**
-     *
      * @param meta
      * @param values
      * @param status
@@ -50,24 +50,26 @@ public class TimeSeries {
         this.status = status;
         return this;
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-       // sb.append(TimeSeries.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-       // sb.append("meta");
-        //sb.append('=');
-        sb.append(((this.meta == null)?"<null>":this.meta));
+
+        sb.append(((this.meta == null) ? "<null>" : this.meta));
         sb.append(',');
         sb.append("values");
         sb.append('=');
-        sb.append(((this.values == null)?"<null>":this.values));
-        sb.append(',');
+        for (Value v: values) {
+            sb.append(v+"\n");
+        }
+        //sb.append((this.values == null) ? "<null>" : this.values);
+        sb.append(",");
         sb.append("status");
         sb.append('=');
-        sb.append(((this.status == null)?"<null>":this.status));
+        sb.append(((this.status == null) ? "<null>" : this.status));
         sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
         } else {
             sb.append(']');
         }

@@ -222,7 +222,7 @@ public class Quote {
         sb.append('=');
         sb.append(((this.exchange == null)?"<null>":this.exchange));
         sb.append(", ");
-        sb.append("micCode");
+        sb.append("mic_code");
         sb.append('=');
         sb.append(((this.micCode == null)?"<null>":this.micCode));
         sb.append(", ");
