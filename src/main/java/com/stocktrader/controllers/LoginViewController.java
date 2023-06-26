@@ -58,13 +58,9 @@ public class LoginViewController {
         registrationWindow = new Stage();
         registrationWindow.setScene(root.getScene());
         registrationWindow.show();
-       // registrationWindow.setAlwaysOnTop(true);
     }
 
-//    public static Stage getRegistrationStage(){
-//        return registrationWindow;
-//    }
-    public static void closeRegistrationWindow(){
+    public static void closeRegistrationWindow() {
         registrationWindow.close();
     }
 }
