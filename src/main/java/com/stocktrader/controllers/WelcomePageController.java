@@ -1,19 +1,20 @@
 package com.stocktrader.controllers;
 
-import com.stocktrader.api.GetApiResponse;
-import com.stocktrader.api.Quote;
-import com.stocktrader.api.RealTimePrice;
-import com.stocktrader.api.TimeSeriesInterval;
+import com.stocktrader.StocksApplication;
+import com.stocktrader.api.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class WelcomePageController {
 
@@ -22,13 +23,17 @@ public class WelcomePageController {
     @FXML
     TextField getQuoteTextField;
     @FXML
+    TextField realTimePriceTextField;
+    @FXML
+    TextField timeSeriesTextField;
+    @FXML
+    TextField symbolTextField;
+    @FXML
     TextArea responseText;
     @FXML
-    Button getQuoteButton;
-    @FXML
-    Button realTimePriceButton;
-    @FXML
-    TextField realTimePriceTextField;
+    ComboBox<String> timeSeriesIntervalMenu;
+
+
 
     private Scene scene;
 
@@ -40,10 +45,6 @@ public class WelcomePageController {
         welcomeText.setText("Welcome " + username + "!");
     }
 
-    public void lookupSymbol() {
-
-    }
-
     @FXML
     private void getQuote() throws IOException, InterruptedException {
         String symbol = getQuoteTextField.getText();
@@ -53,11 +54,24 @@ public class WelcomePageController {
 
     @FXML
     private void getTimeSeries() {
-        //TODO
-        //String symbol
-        //TimeSeriesInterval interval
-        //
-        //implement button, textfield, and dropdown menu to select interval
+        String symbol = timeSeriesTextField.getText();
+        String interval = null;
+        try {
+            interval = timeSeriesIntervalMenu.getValue().toString();
+            TimeSeries timeSeries = new GetApiResponse().timeSeries(symbol, interval);
+            responseText.setText(timeSeries.toString());
+        } catch (Exception e){
+            StocksApplication.showAlert("You must select an interval and enter a valid symbol to lookup a Time-Series");
+            e.printStackTrace();
+        }
+        System.out.println(interval);
+    }
+
+    @FXML
+    private void getSymbol() throws IOException, InterruptedException {
+        String query = symbolTextField.getText();
+        Symbol symbol = new GetApiResponse().symbol(query);
+        responseText.setText(symbol.toString());
     }
 
     @FXML
@@ -77,6 +91,18 @@ public class WelcomePageController {
     private void quoteTextFieldListener(KeyEvent e) throws IOException, InterruptedException {
         if (e.getCode() == KeyCode.ENTER)
             getQuote();
+    }
+
+    @FXML
+    private void timeSeriesListener(KeyEvent e) {
+        if (e.getCode() == KeyCode.ENTER)
+            getTimeSeries();
+    }
+
+    @FXML
+    private void getSymbolListener(KeyEvent e) throws IOException, InterruptedException {
+        if (e.getCode() == KeyCode.ENTER)
+            getSymbol();
     }
 
 }

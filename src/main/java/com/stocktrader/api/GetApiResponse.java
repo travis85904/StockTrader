@@ -12,8 +12,8 @@ import java.util.Properties;
 
 public class GetApiResponse {
 
-    public TimeSeries timeSeries(String symbol, TimeSeriesInterval timeSeriesInterval) throws IOException, InterruptedException {
-        String uri = "https://twelve-data1.p.rapidapi.com/time_series?interval=" + timeSeriesInterval.toString().substring(1) + "&symbol=" + symbol + "&format=json&outputsize=30";
+    public TimeSeries timeSeries(String symbol, String timeSeriesInterval) throws IOException, InterruptedException {
+        String uri = "https://twelve-data1.p.rapidapi.com/time_series?interval=" + timeSeriesInterval + "&symbol=" + symbol + "&format=json&outputsize=30";
         return new Gson().fromJson(getHttpResponse(uri), TimeSeries.class);
     }
 
