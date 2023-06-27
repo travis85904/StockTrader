@@ -1,4 +1,4 @@
-Thank you for checking out my project. First of all you should know this is a work in progress and not full completed yet.
+#Thank you for checking out my project. First of all you should know this is a work in progress and not fully completed yet.
 
 In order to get the project runnin you will need to make a few changes to the source.
 
