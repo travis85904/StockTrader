@@ -1,6 +1,6 @@
 Thank you for checking out my project. First of all you should know this is a work in progress and not fully completed yet.
 
-In order to get the project runnin you will need to make a few changes to the source.
+In order to get the project running you will need to make a few changes to the source.
 
 1. (API)
 In com.stocktrader.api.GetApiConnection.getApiKey() you will need to add your own api key which you can do by 
