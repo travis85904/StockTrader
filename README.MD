@@ -23,5 +23,7 @@ If you choose to use a config.properties file to hold your API key and MongoDB l
 place the file in a folder called "private." the file should look like this:
 
 api.key=<Your_API_key>
+
 mongoPass=<Your_MongoDB_password>
+
 mongoConnectionString=<Your_MongoDB_connection_string>
