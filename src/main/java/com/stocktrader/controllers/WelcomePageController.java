@@ -2,22 +2,25 @@ package com.stocktrader.controllers;
 
 import com.stocktrader.StocksApplication;
 import com.stocktrader.api.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class WelcomePageController {
 
+    private static Stage depositWindow;
+    private String userName;
     @FXML
     Text welcomeText;
     @FXML
@@ -33,12 +36,8 @@ public class WelcomePageController {
     @FXML
     ComboBox<String> timeSeriesIntervalMenu;
 
-
-
-    private Scene scene;
-
-    public void setScene(Scene scene) {
-        this.scene = scene;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setWelcomeText(String username) {
@@ -60,7 +59,7 @@ public class WelcomePageController {
             interval = timeSeriesIntervalMenu.getValue().toString();
             TimeSeries timeSeries = new GetApiResponse().timeSeries(symbol, interval);
             responseText.setText(timeSeries.toString());
-        } catch (Exception e){
+        } catch (Exception e) {
             StocksApplication.showAlert("You must select an interval and enter a valid symbol to lookup a Time-Series");
             e.printStackTrace();
         }
@@ -79,6 +78,18 @@ public class WelcomePageController {
         String symbol = realTimePriceTextField.getText();
         RealTimePrice realTimePrice = new GetApiResponse().realTimePrice(symbol);
         responseText.setText(symbol + "\n" + realTimePrice.toString());
+    }
+
+    @FXML
+    private void depositButton() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("deposit-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        DepositViewController depositViewController = loader.getController();
+        depositViewController.setUserName(userName);
+        depositWindow = new Stage();
+        depositWindow.setScene(root.getScene());
+        depositWindow.show();
     }
 
     @FXML
@@ -103,6 +114,10 @@ public class WelcomePageController {
     private void getSymbolListener(KeyEvent e) throws IOException, InterruptedException {
         if (e.getCode() == KeyCode.ENTER)
             getSymbol();
+    }
+
+    static void closeDepositWindow() {
+        depositWindow.close();
     }
 
 }

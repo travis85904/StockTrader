@@ -23,7 +23,6 @@ public class Symbol {
         for (Data d: data) {
             sb.append(d+"\n");
         }
-        //sb.append(((this.data == null)?"<null>":this.data));
         sb.append(", ");
         sb.append("status");
         sb.append('=');

@@ -12,11 +12,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stocktrader.controllers.WelcomePageController">
+<AnchorPane prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stocktrader.controllers.WelcomePageController">
    <children>
-      <AnchorPane prefHeight="700.0" prefWidth="1200.0">
+      <AnchorPane prefHeight="700.0" prefWidth="1400.0">
          <children>
-            <SplitPane dividerPositions="0.29797979797979796" layoutY="-1.0" prefHeight="700.0" prefWidth="1201.0">
+            <SplitPane dividerPositions="0.29797979797979796" layoutY="-1.0" prefHeight="700.0" prefWidth="1400.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="261.0">
                      <children>
@@ -68,18 +68,19 @@
                               <Font size="15.0" />
                            </font>
                         </Text>
+                        <Button fx:id="depositButton" layoutX="252.0" layoutY="64.0" mnemonicParsing="false" onAction="#depositButton" prefHeight="46.0" prefWidth="113.0" text="Deposit Money!" />
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="698.0" prefWidth="868.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="698.0" prefWidth="859.0">
                      <children>
                         <Text fx:id="welcomeText" layoutX="115.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome User!" wrappingWidth="624.9384765625">
                            <font>
                               <Font size="47.0" />
                            </font>
                         </Text>
-                        <TextArea fx:id="responseText" layoutX="79.0" layoutY="129.0" prefHeight="416.0" prefWidth="694.0" wrapText="true">
+                        <TextArea fx:id="responseText" layoutX="55.0" layoutY="129.0" prefHeight="416.0" prefWidth="864.0" wrapText="true">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="14.0" />
                            </font>
                         </TextArea>
                      </children>

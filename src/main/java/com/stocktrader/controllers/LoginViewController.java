@@ -36,6 +36,7 @@ public class LoginViewController {
                 Parent root = loader.load();
                 WelcomePageController welcomePageController = loader.getController();
                 welcomePageController.setWelcomeText(userName);
+                welcomePageController.setUserName(userName);
                 Scene scene = new Scene(root);
                 StocksApplication.getStage().setScene(root.getScene());
             }
@@ -60,7 +61,7 @@ public class LoginViewController {
         registrationWindow.show();
     }
 
-    public static void closeRegistrationWindow() {
+    static void closeRegistrationWindow() {
         registrationWindow.close();
     }
 }

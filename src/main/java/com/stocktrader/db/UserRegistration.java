@@ -14,6 +14,7 @@ public class UserRegistration {
         document.put("username", userName);
         document.put("password", password);
         document.put("email", email);
+        document.put("balance", 0);
         collection.insertOne(document);
     }
 }

@@ -18,17 +18,9 @@ public class TimeSeries {
     @Expose
     public String status;
 
-    /**
-     * No args constructor for use in serialization
-     */
     public TimeSeries() {
     }
 
-    /**
-     * @param meta
-     * @param values
-     * @param status
-     */
     public TimeSeries(Meta meta, List<Value> values, String status) {
         super();
         this.meta = meta;
@@ -60,9 +52,8 @@ public class TimeSeries {
         sb.append("values");
         sb.append('=');
         for (Value v: values) {
-            sb.append(v+"\n");
+            sb.append(v).append("\n");
         }
-        //sb.append((this.values == null) ? "<null>" : this.values);
         sb.append(",");
         sb.append("status");
         sb.append('=');
