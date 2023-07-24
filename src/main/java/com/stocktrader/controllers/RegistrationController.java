@@ -3,10 +3,8 @@ package com.stocktrader.controllers;
 import com.stocktrader.StocksApplication;
 import com.stocktrader.db.UserRegistration;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class RegistrationController {
     @FXML
@@ -58,7 +56,6 @@ public class RegistrationController {
         boolean registrationSuccess = new UserRegistration().register(firstName, lastName, userName, password, email);
         if (registrationSuccess) {
             LoginViewController.closeRegistrationWindow();
-            return;
         }
     }
 }

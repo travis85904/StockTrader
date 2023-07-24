@@ -1,5 +1,6 @@
 package com.stocktrader.db;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -40,4 +41,6 @@ public class DbConnection {
     public static Document getDocument(String field, String value) {
         return getCollection().find(eq(field, value)).first();
     }
+
+
 }
