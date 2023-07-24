@@ -26,7 +26,7 @@ public class StockPurchase {
         if (balance >= totalOrderCost) {
             double newBalance = balance - totalOrderCost;
 
-            Document update = new Document(symbol, purchase(symbol, orderAmount, doc));
+            Document update = new Document(String.format("stocks.%s", symbol), purchase(symbol, orderAmount, doc));
             performUpdate(update);
 
             Document balanceUpdate = new Document("balance", newBalance);
