@@ -2,6 +2,11 @@ package com.stocktrader.db;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class DbConnection {
     //
@@ -25,7 +30,14 @@ public class DbConnection {
           mongoClient = MongoClients.create(connectionString);
       }*/
 
-   public static MongoClient getMongoClient() {
+    public static MongoClient getMongoClient() {
         return mongoClient;
+    }
+    public static MongoCollection<Document> getCollection(){
+        MongoDatabase db = DbConnection.getMongoClient().getDatabase("db");
+        return db.getCollection("users");
+    }
+    public static Document getDocument(String field, String value) {
+        return getCollection().find(eq(field, value)).first();
     }
 }

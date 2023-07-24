@@ -5,9 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.stocktrader.api.GetApiResponse;
 import org.bson.Document;
-
 import java.io.IOException;
-
 import static com.mongodb.client.model.Filters.eq;
 
 public class StockPurchase {
@@ -35,15 +33,28 @@ public class StockPurchase {
 
     }
 
-    int purchase(String symbol, int orderAmount, Document doc) throws NullPointerException {
+    int purchase(String symbol, int orderAmount, Document doc) throws IndexOutOfBoundsException {
         int currentShares;
+        Object stocks = doc.get("stocks");
 
         try {
-            currentShares = (int) doc.get(symbol);
-            return currentShares + orderAmount;
+            int symbolIndex = stocks.toString().indexOf(symbol);
+            if (symbolIndex == -1) {
+                return orderAmount;
+            }
+            int sharesBeginIndex = stocks.toString().indexOf("=", symbolIndex) + 1;
+            int sharesEndIndex = stocks.toString().indexOf(",", sharesBeginIndex);
 
-        } catch (NullPointerException e) {
-            return orderAmount;
+            currentShares = Integer.parseInt(stocks.toString().substring(sharesBeginIndex, sharesEndIndex));
+
+            return currentShares + orderAmount;
+        } catch (IndexOutOfBoundsException e) {
+            int symbolIndex = stocks.toString().indexOf(symbol);
+            int sharesBeginIndex = stocks.toString().indexOf("=", symbolIndex) + 1;
+            int sharesEndIndex = stocks.toString().indexOf("}", sharesBeginIndex);
+            currentShares = Integer.parseInt(stocks.toString().substring(sharesBeginIndex, sharesEndIndex));
+            e.printStackTrace();
+            return currentShares + orderAmount;
         }
     }
 
