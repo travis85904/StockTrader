@@ -30,19 +30,35 @@ public class RegistrationController {
         String password = passwordField.getText();
         String email = emailField.getText();
 
-        if (firstName.length() > 0) {
-            if (lastName.length() > 0) {
-                if (userName.length() > 0) {
-                    if (email.length() > 0) {
-                        if (password.length() > 0 && password.equals(confirmPasswordField.getText())) {
-                            new UserRegistration().register(firstName, lastName, userName, password, email);
-                            LoginViewController.closeRegistrationWindow();
-                        } else {
-                            StocksApplication.showAlert("Passwords do not match");
-                        }
-                    } else StocksApplication.showAlert("Please enter an Email");
-                } else StocksApplication.showAlert("Please enter a UserName");
-            } else StocksApplication.showAlert("Please enter a Last Name");
-        } else StocksApplication.showAlert("Please enter a First Name");
+        if (firstName.length() == 0) {
+            StocksApplication.showAlert("Please enter a First Name");
+            return;
+        }
+        if (lastName.length() == 0) {
+            StocksApplication.showAlert("Please enter a Last Name");
+            return;
+        }
+        if (userName.length() == 0) {
+            StocksApplication.showAlert("Please enter a UserName");
+            return;
+        }
+        if (email.length() == 0) {
+            StocksApplication.showAlert("Please enter an Email");
+            return;
+        }
+        if (password.length() == 0) {
+            StocksApplication.showAlert("Please enter a Password");
+            return;
+        }
+        if (!password.equals(confirmPasswordField.getText())) {
+            StocksApplication.showAlert("Passwords do not match");
+            return;
+        }
+
+        boolean registrationSuccess = new UserRegistration().register(firstName, lastName, userName, password, email);
+        if (registrationSuccess) {
+            LoginViewController.closeRegistrationWindow();
+            return;
+        }
     }
 }

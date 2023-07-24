@@ -69,6 +69,8 @@
                            </font>
                         </Text>
                         <Button fx:id="depositButton" layoutX="252.0" layoutY="64.0" mnemonicParsing="false" onAction="#depositButton" prefHeight="46.0" prefWidth="113.0" text="Deposit Money!" />
+                        <Button fx:id="sellStocksButton" layoutX="252.0" layoutY="195.0" mnemonicParsing="false" onAction="#sellStocksButton" prefHeight="46.0" prefWidth="113.0" text="Sell Stocks" />
+                        <Button fx:id="buyStocksButton" layoutX="252.0" layoutY="131.0" mnemonicParsing="false" onAction="#buyStocksButton" prefHeight="46.0" prefWidth="113.0" text="Buy Stocks" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="698.0" prefWidth="859.0">

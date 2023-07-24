@@ -21,7 +21,7 @@ public class StocksApplication extends Application {
     }
 
     public static void showAlert(String alertText) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(alertText);
         alert.show();
     }

@@ -93,6 +93,24 @@ public class WelcomePageController {
     }
 
     @FXML
+    private void buyStocksButton() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("buy-stocks-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        BuyStocksController buyStocksController = loader.getController();
+        buyStocksController.setUserName(userName);
+
+        Stage buyStocksWindow = new Stage();
+        buyStocksWindow.setScene(root.getScene());
+        buyStocksWindow.show();
+    }
+
+    @FXML
+    private void sellStocksButton(){
+        //TODO
+    }
+
+    @FXML
     private void realTimePriceListener(KeyEvent e) throws IOException, InterruptedException {
         if (e.getCode() == KeyCode.ENTER)
             getRealTimePrice();

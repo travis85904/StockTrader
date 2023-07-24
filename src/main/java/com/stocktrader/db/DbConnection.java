@@ -5,7 +5,7 @@ import com.mongodb.client.MongoClients;
 
 public class DbConnection {
     //
-    //You will need to setup your own MongoDB server in order for this function to work
+    //You will need to set up your own MongoDB server in order for this function to work
     //
     //You can create a local server on your PC or use the commented out code to
     //use a remote MongoDB server
