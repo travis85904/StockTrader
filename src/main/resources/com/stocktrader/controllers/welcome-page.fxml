@@ -69,33 +69,32 @@
                            </font>
                         </Text>
                         <Button fx:id="depositButton" layoutX="252.0" layoutY="64.0" mnemonicParsing="false" onAction="#depositButton" prefHeight="46.0" prefWidth="113.0" text="Deposit Money!" />
-                        <Button fx:id="sellStocksButton" layoutX="252.0" layoutY="195.0" mnemonicParsing="false" onAction="#sellStocksButton" prefHeight="46.0" prefWidth="113.0" text="Sell Stocks" />
-                        <Button fx:id="buyStocksButton" layoutX="252.0" layoutY="131.0" mnemonicParsing="false" onAction="#buyStocksButton" prefHeight="46.0" prefWidth="113.0" text="Buy Stocks" />
+                        <Button fx:id="buyStocksButton" layoutX="252.0" layoutY="164.0" mnemonicParsing="false" onAction="#buyStocksButton" prefHeight="46.0" prefWidth="113.0" text="Buy &amp; Sell Stocks" />
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="698.0" prefWidth="859.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="691.0" prefWidth="903.0">
                      <children>
                         <Text fx:id="welcomeText" layoutX="199.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome User!" wrappingWidth="579.9384765625">
                            <font>
                               <Font size="47.0" />
                            </font>
                         </Text>
-                        <TextArea fx:id="responseText" editable="false" layoutX="31.0" layoutY="211.0" prefHeight="416.0" prefWidth="337.0" wrapText="true">
+                        <TextArea fx:id="responseText" editable="false" layoutX="31.0" layoutY="155.0" prefHeight="416.0" prefWidth="337.0" wrapText="true">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextArea>
-                        <TextArea fx:id="myPortfolioText" editable="false" layoutX="466.0" layoutY="211.0" prefHeight="416.0" prefWidth="414.0" wrapText="true">
+                        <TextArea fx:id="myPortfolioText" editable="false" layoutX="419.0" layoutY="155.0" prefHeight="416.0" prefWidth="360.0" wrapText="true">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
                         </TextArea>
-                        <Text layoutX="637.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Account">
+                        <Text layoutX="557.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Account">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Text>
-                        <Text layoutX="128.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lookup Information">
+                        <Text layoutX="148.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lookup Stocks">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
