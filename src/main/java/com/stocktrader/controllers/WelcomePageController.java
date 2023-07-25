@@ -1,7 +1,11 @@
 package com.stocktrader.controllers;
 
+import com.google.gson.Gson;
 import com.stocktrader.StocksApplication;
 import com.stocktrader.api.*;
+import com.stocktrader.db.DbConnection;
+import com.stocktrader.parser.MongoParse;
+import com.stocktrader.parser.Stock;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +17,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.bson.Document;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.List;
 
 public class WelcomePageController {
 
@@ -33,7 +40,22 @@ public class WelcomePageController {
     @FXML
     TextArea responseText;
     @FXML
+    TextArea myPortfolioText;
+    @FXML
     ComboBox<String> timeSeriesIntervalMenu;
+
+    Document doc;
+    MongoParse mongoParse;
+    List<Stock> stockList;
+
+    public void viewPortfolio(){
+        doc = DbConnection.getDocument("username", userName);
+        mongoParse = new Gson().fromJson(doc.toJson(), MongoParse.class);
+        DecimalFormat df = new DecimalFormat("###,###,###.##");
+        stockList = mongoParse.getStocks();
+        myPortfolioText.setText(String.format("Balance: %s\n", df.format(doc.get("balance"))));
+        myPortfolioText.appendText(stockList.toString());
+    }
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -102,6 +124,8 @@ public class WelcomePageController {
         Stage buyStocksWindow = new Stage();
         buyStocksWindow.setScene(root.getScene());
         buyStocksWindow.show();
+
+        buyStocksController.displayPortfolio();
     }
 
     @FXML

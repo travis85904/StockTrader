@@ -7,6 +7,7 @@ module com.stocks.stocktrader {
     requires org.mongodb.driver.sync.client;
     requires org.mongodb.bson;
 
+    opens com.stocktrader.parser to com.google.gson;
     opens com.stocktrader to javafx.fxml;
     opens com.stocktrader.api to javafx.fxml, com.google.gson;
     opens com.stocktrader.db to javafx.fxml;

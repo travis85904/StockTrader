@@ -1,66 +1,66 @@
 package com.stocktrader.db;
 
+import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Updates;
 import com.stocktrader.api.GetApiResponse;
+import com.stocktrader.parser.MongoParse;
+import com.stocktrader.parser.Stock;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.io.IOException;
+import java.util.List;
 
 public class StockSell {
-    private final String userName;
+    private int symbolIndex;
+    MongoParse mongoParse;
+    List<Stock> stockList;
 
     public StockSell(String userName, String symbol, int orderAmount) throws IOException, InterruptedException {
         Document doc = DbConnection.getDocument("username", userName);
-        this.userName = userName;
+        mongoParse = new Gson().fromJson(doc.toJson(), MongoParse.class);
+        stockList = mongoParse.getStocks();
 
         double pricePerShare = Double.parseDouble(new GetApiResponse().realTimePrice(symbol).price());
         double totalOrderCost = pricePerShare * orderAmount;
         double balance = (double) doc.get("balance");
         double balanceAfterSale = balance + totalOrderCost;
-        int sharesLeftAfterSale = getSharesLeftAfterSale(symbol, orderAmount, doc);
+        int sharesLeftAfterSale = sharesLeftAfterSale(symbol, orderAmount);
 
-        if (sharesLeftAfterSale != -1) {
-            Document sharesUpdate = new Document(String.format("stocks.%s", symbol), sharesLeftAfterSale);
-            Document balanceUpdate = new Document("balance", balanceAfterSale);
-
-            performUpdate(sharesUpdate);
-            performUpdate(balanceUpdate);
+        if (sharesLeftAfterSale == 0) {
+            Bson delete = Updates.pull("stocks", new Document("symbol", symbol));
+            DbConnection.getCollection().updateOne(doc, delete);
+            DbConnection.getCollection().updateOne(doc, new Document("$pull", new Document("stocks", symbolIndex)));
+            balanceUpdate(userName, balanceAfterSale);
+            return;
+        }
+        if (sharesLeftAfterSale > -1) {
+            Document sharesUpdate = new Document(String.format("stocks." + symbolIndex + ".shares"), sharesLeftAfterSale);
+            performUpdate(sharesUpdate, userName);
+            balanceUpdate(userName, balanceAfterSale);
         }
     }
 
-    int getSharesLeftAfterSale(String symbol, int orderAmount, Document doc) {
-        int currentShares;
-        Object stocks = doc.get("stocks");
+    private void balanceUpdate(String userName, double balanceAfterSale) {
+        Document balanceUpdate = new Document("balance", balanceAfterSale);
+        performUpdate(balanceUpdate, userName);
+    }
 
-        try {
-            int symbolIndex = stocks.toString().indexOf(symbol);
-            if (symbolIndex == -1) {
-                //System.out.println("You don't own any shares of " + symbol);
-                return -1;
+    int sharesLeftAfterSale(String symbol, int orderAmount) {
+        for (Stock s : stockList) {
+            if (s.getSymbol().equals(symbol)) {
+                symbolIndex = stockList.indexOf(s);
+                return s.getShares() - orderAmount;
             }
-            int sharesBeginIndex = stocks.toString().indexOf("=", symbolIndex) + 1;
-            int sharesEndIndex = stocks.toString().indexOf(",", sharesBeginIndex);
-            currentShares = Integer.parseInt(stocks.toString().substring(sharesBeginIndex, sharesEndIndex));
-
-        } catch (IndexOutOfBoundsException e) {
-            int symbolIndex = stocks.toString().indexOf(symbol);
-            int sharesBeginIndex = stocks.toString().indexOf("=", symbolIndex) + 1;
-            int sharesEndIndex = stocks.toString().indexOf("}", sharesBeginIndex);
-            currentShares = Integer.parseInt(stocks.toString().substring(sharesBeginIndex, sharesEndIndex));
         }
-
-        if (currentShares < orderAmount) {
-            //System.out.println("You can't sell more shares than you have");
-            return -1;
-        }
-        return currentShares - orderAmount;
+        return -1;
     }
 
-    private void performUpdate(Document update) {
+    private void performUpdate(Document update, String userName) {
         MongoCollection<Document> collection = DbConnection.getCollection();
         Document doc = DbConnection.getDocument("username", userName);
         collection.updateOne(doc, new BasicDBObject("$set", update));
     }
-
 }

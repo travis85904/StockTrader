@@ -37,6 +37,7 @@ public class LoginViewController {
                 WelcomePageController welcomePageController = loader.getController();
                 welcomePageController.setWelcomeText(userName);
                 welcomePageController.setUserName(userName);
+                welcomePageController.viewPortfolio();
                 Scene scene = new Scene(root);
                 StocksApplication.getStage().setScene(root.getScene());
             }
