@@ -8,17 +8,24 @@ public class DepositViewController {
 
     @FXML
     private TextField depositAmountTextField;
-    private String userName;
+    private String username;
+    private WelcomePageController welcomePageController;
 
     @FXML
     private void deposit() {
         int amount = Integer.parseInt(depositAmountTextField.getText());
-        new Deposit(userName, amount);
-        WelcomePageController.closeDepositWindow();
+        new Deposit(username, amount);
+        welcomePageController.displayPortfolio();
+        welcomePageController.closeDepositWindow();
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    void setup (String username, WelcomePageController welcomePageController){
+        this.username = username;
+        this.welcomePageController = welcomePageController;
     }
 
 }

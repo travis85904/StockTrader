@@ -10,7 +10,7 @@ You could also simply modify the method to just return your API key as a String 
 The api used here is Twelve Data on the RapidAPI website.
 
 2. (MongoDB)
-In com.stocktrader.db.DbConnection you will need to setup a MongoDB client locally from your PC.
+In db.main.java.com.s.stocktrader.DbConnection you will need to setup a MongoDB client locally from your PC.
 
 Another option is to use the commented out source code to use a remote MongoDB server which would require
 you to provide your MongoDB login String in the config.properties file.
