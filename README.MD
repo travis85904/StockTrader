@@ -13,7 +13,7 @@ The api used here is Twelve Data on the RapidAPI website.
 In com.stocktrader.db.DbConnection you will need to setup a MongoDB client locally from your PC.
 
 Another option is to use the commented out source code to use a remote MongoDB server which would require
-you to prove your MongoDB login String in the config.properties file.
+you to provide your MongoDB login String in the config.properties file.
 
 Be sure to take a look at the provided Database and Collection names in the db.UserAuth class and make sure they match
 up with where you would like to store your user details in your Database.
