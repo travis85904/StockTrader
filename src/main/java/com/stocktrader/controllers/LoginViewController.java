@@ -45,7 +45,7 @@ public class LoginViewController {
     }
 
     @FXML
-    private void loginFieldKeyListener(KeyEvent e) throws IOException, InterruptedException {
+    private void loginFieldKeyListener(KeyEvent e) {
         if (e.getCode() == KeyCode.ENTER)
             onLoginButtonClick();
     }

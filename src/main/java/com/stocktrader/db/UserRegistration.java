@@ -5,15 +5,14 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.stocktrader.StocksApplication;
-import com.stocktrader.parser.Stock;
 import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UserRegistration {
-    MongoDatabase db = DbConnection.getMongoClient().getDatabase("db");
-    MongoCollection<Document> collection = db.getCollection("users");
+    final MongoDatabase db = DbConnection.getMongoClient().getDatabase("db");
+    final MongoCollection<Document> collection = db.getCollection("users");
 
     public boolean register(String firstName, String lastName, String userName, String password, String email) {
         Document doc = collection.find(Filters.eq("username", userName)).first();
@@ -26,7 +25,7 @@ public class UserRegistration {
             document.put("password", password);
             document.put("email", email);
             document.put("balance", 0);
-            document.put("stocks", new ArrayList<BasicDBObject>(
+            document.put("stocks", new ArrayList<>(
                     Arrays.asList(
                             new BasicDBObject("symbol", "NONE"),
                             new BasicDBObject("shares", 0)

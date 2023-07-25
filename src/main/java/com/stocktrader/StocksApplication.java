@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class StocksApplication extends Application {
     private static Stage mainStage;
-    private static String userName;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
@@ -28,10 +28,6 @@ public class StocksApplication extends Application {
 
     public static Stage getStage(){
         return mainStage;
-    }
-
-    public static String getUserName(){
-        return userName;
     }
 
 }

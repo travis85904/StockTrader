@@ -16,8 +16,8 @@ import java.util.List;
 
 public class StockSell {
     private int symbolIndex;
-    MongoParse mongoParse;
-    List<Stock> stockList;
+    final MongoParse mongoParse;
+    final List<Stock> stockList;
 
     public StockSell(String userName, String symbol, int orderAmount) throws IOException, InterruptedException {
         Document doc = DbConnection.getDocument("username", userName);

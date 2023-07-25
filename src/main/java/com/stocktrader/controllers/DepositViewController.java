@@ -19,10 +19,6 @@ public class DepositViewController {
         welcomePageController.closeDepositWindow();
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     void setup (String username, WelcomePageController welcomePageController){
         this.username = username;
         this.welcomePageController = welcomePageController;

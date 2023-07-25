@@ -21,7 +21,7 @@ public class Symbol {
         sb.append("data");
         sb.append('=');
         for (Data d: data) {
-            sb.append(d+"\n");
+            sb.append(d).append("\n");
         }
         sb.append(", ");
         sb.append("status");

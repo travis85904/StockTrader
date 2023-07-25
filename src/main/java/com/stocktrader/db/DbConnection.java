@@ -1,6 +1,5 @@
 package com.stocktrader.db;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -16,7 +15,7 @@ public class DbConnection {
     //You can create a local server on your PC or use the commented out code to
     //use a remote MongoDB server
     //Just be sure to include your mongo login string in your config file
-    static MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017/");
+    static final MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017/");
 /*    static MongoClient mongoClient;
       static Properties properties = new Properties();
       static {

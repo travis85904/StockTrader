@@ -21,7 +21,7 @@ public class ConfirmOrderAlertController {
         this.buyStocksController = buyStocksController;
         this.orderType = orderType;
 
-        confirmationText.setText(String.format("%s %s shares of %s at Market Price?", orderType, String.valueOf(orderQuantity), symbol));
+        confirmationText.setText(String.format("%s %s shares of %s at Market Price?", orderType, orderQuantity, symbol));
     }
 
     @FXML

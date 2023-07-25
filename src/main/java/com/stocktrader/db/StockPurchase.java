@@ -13,8 +13,8 @@ import java.util.List;
 public class StockPurchase {
     private int symbolIndex;
     private boolean symbolFound = false;
-    MongoParse mongoParse;
-    List<Stock> stockList;
+    final MongoParse mongoParse;
+    final List<Stock> stockList;
 
     public StockPurchase(String userName, String symbol, int orderAmount) throws Exception {
         Document doc = DbConnection.getDocument("username", userName);

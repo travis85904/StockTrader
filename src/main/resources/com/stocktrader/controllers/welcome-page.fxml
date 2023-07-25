@@ -72,7 +72,7 @@
                         <Button fx:id="buyStocksButton" layoutX="252.0" layoutY="164.0" mnemonicParsing="false" onAction="#buyStocksButton" prefHeight="46.0" prefWidth="113.0" text="Buy &amp; Sell Stocks" />
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="691.0" prefWidth="903.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="688.0" prefWidth="837.0">
                      <children>
                         <Text fx:id="welcomeText" layoutX="199.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome User!" wrappingWidth="579.9384765625">
                            <font>
