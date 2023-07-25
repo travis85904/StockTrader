@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="602.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stocktrader.controllers.BuyStocksController">
+   <children>
+      <Text fx:id="text" layoutX="170.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy Stocks" wrappingWidth="198.13671875">
+         <font>
+            <Font size="38.0" />
+         </font></Text>
+      <TextArea fx:id="responseText" editable="false" layoutX="245.0" layoutY="75.0" prefHeight="145.0" prefWidth="261.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></TextArea>
+      <Text layoutX="18.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lookup Symbol">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="realTimePriceTextField" layoutX="17.0" layoutY="104.0" onKeyPressed="#realTimePriceListener" promptText="enter symbol, eg: AAPL" />
+      <Button fx:id="getRealTimePriceButton" layoutX="18.0" layoutY="139.0" mnemonicParsing="false" onAction="#getRealTimePrice" prefHeight="32.0" prefWidth="79.0" text="Submit" />
+      <Line endX="100.0" layoutX="115.0" layoutY="186.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="120.0" layoutY="55.0" startX="-100.0" />
+      <Button fx:id="buyStocksButton" layoutX="15.0" layoutY="286.0" mnemonicParsing="false" onAction="#buyStocksButton" prefHeight="44.0" prefWidth="79.0" text="Buy">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="sellStocksButton" layoutX="104.0" layoutY="286.0" mnemonicParsing="false" onAction="#sellStocksButton" prefHeight="39.0" prefWidth="79.0" text="Sell">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <TextField fx:id="orderQuantityText" layoutX="17.0" layoutY="252.0" promptText="enter a number" />
+      <Text layoutX="18.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How Many Shares?">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="myPortfolioText" editable="false" layoutX="245.0" layoutY="301.0" prefHeight="273.0" prefWidth="261.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextArea>
+      <Line endX="161.0" layoutX="345.0" layoutY="248.0" startX="-100.0" />
+      <Text layoutX="322.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Portfolio">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="18.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1:" />
+      <Text layoutX="18.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2:" />
+   </children>
+</AnchorPane>
