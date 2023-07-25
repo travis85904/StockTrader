@@ -25,8 +25,8 @@ import java.util.List;
 
 public class WelcomePageController {
 
-    private Stage depositWindow;
-    private String username;
+    private static Stage depositWindow;
+    private String userName;
     @FXML
     Text welcomeText;
     @FXML
@@ -44,28 +44,24 @@ public class WelcomePageController {
     @FXML
     ComboBox<String> timeSeriesIntervalMenu;
 
-    public void setup(String username){
-        setUsername(username);
-        setWelcomeText();
-        displayPortfolio();
-    }
+    Document doc;
+    MongoParse mongoParse;
+    List<Stock> stockList;
 
-    public void displayPortfolio() {
-        Document doc = DbConnection.getDocument("username", username);
-        MongoParse mongoParse = new Gson().fromJson(doc.toJson(), MongoParse.class);
+    public void viewPortfolio(){
+        doc = DbConnection.getDocument("username", userName);
+        mongoParse = new Gson().fromJson(doc.toJson(), MongoParse.class);
         DecimalFormat df = new DecimalFormat("###,###,###.##");
-        List<Stock> stockList = mongoParse.getStocks();
+        stockList = mongoParse.getStocks();
         myPortfolioText.setText(String.format("Balance: %s\n", df.format(doc.get("balance"))));
-        for (int i = 1; i < stockList.size(); i++) {
-            myPortfolioText.appendText(stockList.get(i).toString());
-        }
+        myPortfolioText.appendText(stockList.toString());
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setWelcomeText() {
+    public void setWelcomeText(String username) {
         welcomeText.setText("Welcome " + username + "!");
     }
 
@@ -111,7 +107,7 @@ public class WelcomePageController {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         DepositViewController depositViewController = loader.getController();
-        depositViewController.setup(username, this);
+        depositViewController.setUserName(userName);
         depositWindow = new Stage();
         depositWindow.setScene(root.getScene());
         depositWindow.show();
@@ -123,11 +119,18 @@ public class WelcomePageController {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         BuyStocksController buyStocksController = loader.getController();
-        buyStocksController.setup(username, this);
+        buyStocksController.setUserName(userName);
 
         Stage buyStocksWindow = new Stage();
         buyStocksWindow.setScene(root.getScene());
         buyStocksWindow.show();
+
+        buyStocksController.displayPortfolio();
+    }
+
+    @FXML
+    private void sellStocksButton(){
+        //TODO
     }
 
     @FXML
@@ -154,7 +157,7 @@ public class WelcomePageController {
             getSymbol();
     }
 
-    void closeDepositWindow() {
+    static void closeDepositWindow() {
         depositWindow.close();
     }
 

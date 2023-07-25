@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Updates;
-import com.stocktrader.StocksApplication;
 import com.stocktrader.api.GetApiResponse;
 import com.stocktrader.parser.MongoParse;
 import com.stocktrader.parser.Stock;
@@ -41,8 +40,6 @@ public class StockSell {
             Document sharesUpdate = new Document(String.format("stocks." + symbolIndex + ".shares"), sharesLeftAfterSale);
             performUpdate(sharesUpdate, userName);
             balanceUpdate(userName, balanceAfterSale);
-        } else {
-            StocksApplication.showAlert("You don't have that many shares");
         }
     }
 

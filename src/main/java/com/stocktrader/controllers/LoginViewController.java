@@ -28,14 +28,16 @@ public class LoginViewController {
     protected void onLoginButtonClick() {
         boolean isValidLoginInfo;
         try {
-            String username = usernameField.getText();
+            String userName = usernameField.getText();
             String password = passwordField.getText();
-            isValidLoginInfo = new UserAuth().authenticate(username, password);
+            isValidLoginInfo = new UserAuth().authenticate(userName, password);
             if (isValidLoginInfo) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("welcome-page.fxml"));
                 Parent root = loader.load();
                 WelcomePageController welcomePageController = loader.getController();
-                welcomePageController.setup(username);
+                welcomePageController.setWelcomeText(userName);
+                welcomePageController.setUserName(userName);
+                welcomePageController.viewPortfolio();
                 Scene scene = new Scene(root);
                 StocksApplication.getStage().setScene(root.getScene());
             }
