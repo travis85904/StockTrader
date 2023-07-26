@@ -1,19 +1,19 @@
 package com.stocktrader.controllers;
 
+import com.google.common.hash.Hashing;
 import com.stocktrader.StocksApplication;
 import com.stocktrader.db.UserAuth;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class LoginViewController {
     private static Stage registrationWindow;
@@ -21,15 +21,15 @@ public class LoginViewController {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
-    @FXML
-    private Button loginButton;
 
     @FXML
     protected void onLoginButtonClick() {
         boolean isValidLoginInfo;
         try {
             String username = usernameField.getText();
-            String password = passwordField.getText();
+            String password = Hashing.sha256()
+                    .hashString(passwordField.getText(), StandardCharsets.UTF_8)
+                    .toString();
             isValidLoginInfo = new UserAuth().authenticate(username, password);
             if (isValidLoginInfo) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("welcome-page.fxml"));

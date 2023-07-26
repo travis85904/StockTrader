@@ -8,6 +8,7 @@ import com.stocktrader.api.GetApiResponse;
 import com.stocktrader.parser.MongoParse;
 import com.stocktrader.parser.Stock;
 import org.bson.Document;
+
 import java.util.List;
 
 public class StockPurchase {
@@ -36,18 +37,20 @@ public class StockPurchase {
                 Document newSymbol = new Document("stocks." + symbolIndex + ".symbol", symbol);
                 performUpdate(newSymbol, userName);
             }
-                Document sharesUpdate = new Document("stocks." + symbolIndex + ".shares", shares);
-                performUpdate(sharesUpdate, userName);
+            Document sharesUpdate = new Document("stocks." + symbolIndex + ".shares", shares);
+            performUpdate(sharesUpdate, userName);
         } else StocksApplication.showAlert("Your balance is too low");
     }
 
     //checks to see if the user already owns shares of the company
     private int sharesAfterPurchase(String symbol, int orderAmount) {
         for (Stock s : stockList) {
-            if (s.getSymbol().equals(symbol)) {
-                symbolFound = true;
-                symbolIndex = stockList.indexOf(s);
-                return s.getShares() + orderAmount;
+            if (s.getSymbol() != null) {
+                if (s.getSymbol().equals(symbol)) {
+                    symbolFound = true;
+                    symbolIndex = stockList.indexOf(s);
+                    return s.getShares() + orderAmount;
+                }
             }
         }
         symbolIndex = stockList.size();

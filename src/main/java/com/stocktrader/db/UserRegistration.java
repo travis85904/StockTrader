@@ -24,7 +24,7 @@ public class UserRegistration {
             document.put("username", userName);
             document.put("password", password);
             document.put("email", email);
-            document.put("balance", 0);
+            document.put("balance", 0d);
             document.put("stocks", new ArrayList<>(
                     Arrays.asList(
                             new BasicDBObject("symbol", "NONE"),

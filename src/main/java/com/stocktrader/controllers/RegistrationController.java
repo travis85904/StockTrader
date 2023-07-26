@@ -1,10 +1,13 @@
 package com.stocktrader.controllers;
 
+import com.google.common.hash.Hashing;
 import com.stocktrader.StocksApplication;
 import com.stocktrader.db.UserRegistration;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.nio.charset.StandardCharsets;
 
 public class RegistrationController {
     @FXML
@@ -25,7 +28,12 @@ public class RegistrationController {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String userName = userNameField.getText();
-        String password = passwordField.getText();
+        String password = Hashing.sha256()
+                .hashString(passwordField.getText(), StandardCharsets.UTF_8)
+                .toString();
+        String passwordConfirmation = Hashing.sha256()
+                .hashString(confirmPasswordField.getText(), StandardCharsets.UTF_8)
+                .toString();
         String email = emailField.getText();
 
         if (firstName.length() == 0) {
@@ -48,7 +56,7 @@ public class RegistrationController {
             StocksApplication.showAlert("Please enter a Password");
             return;
         }
-        if (!password.equals(confirmPasswordField.getText())) {
+        if (!password.equals(passwordConfirmation)) {
             StocksApplication.showAlert("Passwords do not match");
             return;
         }

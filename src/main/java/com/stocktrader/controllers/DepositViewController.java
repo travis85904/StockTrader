@@ -13,7 +13,7 @@ public class DepositViewController {
 
     @FXML
     private void deposit() {
-        int amount = Integer.parseInt(depositAmountTextField.getText());
+        double amount = Double.parseDouble(depositAmountTextField.getText());
         new Deposit(username, amount);
         welcomePageController.displayPortfolio();
         welcomePageController.closeDepositWindow();
