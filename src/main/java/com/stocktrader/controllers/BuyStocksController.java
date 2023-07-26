@@ -1,11 +1,8 @@
 package com.stocktrader.controllers;
 
-import com.google.gson.Gson;
+import com.stocktrader.StocksApplication;
 import com.stocktrader.api.GetApiResponse;
 import com.stocktrader.api.RealTimePrice;
-import com.stocktrader.db.DbConnection;
-import com.stocktrader.parser.MongoParse;
-import com.stocktrader.parser.Stock;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,11 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
-import org.bson.Document;
-
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.List;
 
 public class BuyStocksController {
     @FXML
@@ -37,25 +30,21 @@ public class BuyStocksController {
     private static Stage confirmOrderAlert;
     private String username;
 
-
-    public void displayPortfolio() {
-        Document doc = DbConnection.getDocument("username", username);
-        MongoParse mongoParse = new Gson().fromJson(doc.toJson(), MongoParse.class);
-        DecimalFormat df = new DecimalFormat("###,###,###.##");
-        List<Stock> stockList = mongoParse.getStocks();
-        myPortfolioText.setText(String.format("Balance: %s\n", df.format(doc.get("balance"))));
-        for (int i = 1; i < stockList.size(); i++) {
-            myPortfolioText.appendText(stockList.get(i).toString());
-        }
+    void displayPortfolio() {
+        myPortfolioText.setText(StocksApplication.printBalance(username));
+        myPortfolioText.appendText(StocksApplication.printPortfolio(username));
     }
 
-    public void buyStocksButton(ActionEvent actionEvent) throws IOException {
+    @FXML
+    private void buyStocksButton(ActionEvent actionEvent) throws IOException {
         placeOrder("BUY");
     }
 
-    public void sellStocksButton(ActionEvent actionEvent) throws IOException {
+    @FXML
+    private void sellStocksButton(ActionEvent actionEvent) throws IOException {
         placeOrder("SELL");
     }
+
     private void placeOrder(String orderType) throws IOException {
         final int orderQuantity = Integer.parseInt(orderQuantityText.getText());
         final String symbol = realTimePriceTextField.getText();
@@ -84,6 +73,10 @@ public class BuyStocksController {
             getRealTimePrice();
     }
 
+    void closeOrderAlert() {
+        confirmOrderAlert.close();
+        welcomePageController.displayPortfolio();
+    }
     void setup(String username, WelcomePageController welcomePageController) {
         this.username = username;
         this.welcomePageController = welcomePageController;
@@ -91,8 +84,4 @@ public class BuyStocksController {
         orderQuantityText.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
     }
 
-    public void closeOrderAlert() {
-        confirmOrderAlert.close();
-        welcomePageController.displayPortfolio();
-    }
 }

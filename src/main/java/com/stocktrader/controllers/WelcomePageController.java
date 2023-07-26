@@ -1,11 +1,7 @@
 package com.stocktrader.controllers;
 
-import com.google.gson.Gson;
 import com.stocktrader.StocksApplication;
 import com.stocktrader.api.*;
-import com.stocktrader.db.DbConnection;
-import com.stocktrader.parser.MongoParse;
-import com.stocktrader.parser.Stock;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,11 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.bson.Document;
-
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.List;
 
 public class WelcomePageController {
 
@@ -44,21 +36,9 @@ public class WelcomePageController {
     @FXML
     ComboBox<String> timeSeriesIntervalMenu;
 
-    public void setup(String username){
-        setUsername(username);
-        setWelcomeText();
-        displayPortfolio();
-    }
-
-    public void displayPortfolio() {
-        Document doc = DbConnection.getDocument("username", username);
-        MongoParse mongoParse = new Gson().fromJson(doc.toJson(), MongoParse.class);
-        DecimalFormat df = new DecimalFormat("###,###,###.##");
-        List<Stock> stockList = mongoParse.getStocks();
-        myPortfolioText.setText(String.format("Balance: %s\n", df.format(doc.get("balance"))));
-        for (int i = 1; i < stockList.size(); i++) {
-            myPortfolioText.appendText(stockList.get(i).toString());
-        }
+    void displayPortfolio() {
+        myPortfolioText.setText(StocksApplication.printBalance(username));
+        myPortfolioText.appendText(StocksApplication.printPortfolio(username));
     }
 
     public void setUsername(String username) {
@@ -81,14 +61,13 @@ public class WelcomePageController {
         String symbol = timeSeriesTextField.getText();
         String interval = null;
         try {
-            interval = timeSeriesIntervalMenu.getValue().toString();
+            interval = timeSeriesIntervalMenu.getValue();
             TimeSeries timeSeries = new GetApiResponse().timeSeries(symbol, interval);
             responseText.setText(timeSeries.toString());
         } catch (Exception e) {
             StocksApplication.showAlert("You must select an interval and enter a valid symbol to lookup a Time-Series");
             e.printStackTrace();
         }
-        System.out.println(interval);
     }
 
     @FXML
@@ -158,4 +137,9 @@ public class WelcomePageController {
         depositWindow.close();
     }
 
+    void setup(String username) {
+        setUsername(username);
+        setWelcomeText();
+        displayPortfolio();
+    }
 }

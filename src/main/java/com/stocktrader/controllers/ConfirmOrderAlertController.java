@@ -14,7 +14,7 @@ public class ConfirmOrderAlertController {
     private BuyStocksController buyStocksController;
     private String orderType;
 
-    public void setup(String username, String symbol, int orderQuantity, String orderType, BuyStocksController buyStocksController) {
+    void setup(String username, String symbol, int orderQuantity, String orderType, BuyStocksController buyStocksController) {
         this.symbol = symbol;
         this.orderQuantity = orderQuantity;
         this.username = username;
