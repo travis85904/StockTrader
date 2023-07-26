@@ -1,4 +1,5 @@
-Thank you for checking out my project. First of all you should know this is a work in progress and not fully completed yet.
+Thank you for checking out my project. ~~First of all you should know this is a work in progress and not fully completed yet.~~
+This is now a functioning application which includes: new user registration, login, deposit money, get quotes, buy/sell stocks.
 
 In order to get the project running you will need to make a few changes to the source.
 
