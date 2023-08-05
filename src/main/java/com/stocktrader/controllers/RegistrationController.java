@@ -36,23 +36,23 @@ public class RegistrationController {
                 .toString();
         String email = emailField.getText();
 
-        if (firstName.length() == 0) {
+        if (firstName.isEmpty()) {
             StocksApplication.showAlert("Please enter a First Name");
             return;
         }
-        if (lastName.length() == 0) {
+        if (lastName.isEmpty()) {
             StocksApplication.showAlert("Please enter a Last Name");
             return;
         }
-        if (userName.length() == 0) {
+        if (userName.isEmpty()) {
             StocksApplication.showAlert("Please enter a UserName");
             return;
         }
-        if (email.length() == 0) {
+        if (email.isEmpty()) {
             StocksApplication.showAlert("Please enter an Email");
             return;
         }
-        if (password.length() == 0) {
+        if (password.isEmpty()) {
             StocksApplication.showAlert("Please enter a Password");
             return;
         }
