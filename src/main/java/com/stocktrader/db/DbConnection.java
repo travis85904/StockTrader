@@ -34,8 +34,7 @@ public class DbConnection {
         return mongoClient;
     }
     public static MongoCollection<Document> getCollection(){
-        MongoDatabase db = DbConnection.getMongoClient().getDatabase("db");
-        return db.getCollection("users");
+        return mongoClient.getDatabase("db").getCollection("users");
     }
     public static Document getDocument(String field, String value) {
         return getCollection().find(eq(field, value)).first();
