@@ -59,7 +59,7 @@ public class WelcomePageController {
     @FXML
     private void getTimeSeries() {
         String symbol = timeSeriesTextField.getText();
-        String interval = null;
+        String interval;
         try {
             interval = timeSeriesIntervalMenu.getValue();
             TimeSeries timeSeries = new GetApiResponse().timeSeries(symbol, interval);
