@@ -79,22 +79,22 @@
                               <Font size="47.0" />
                            </font>
                         </Text>
-                        <TextArea fx:id="responseText" editable="false" layoutX="31.0" layoutY="155.0" prefHeight="416.0" prefWidth="337.0" wrapText="true">
+                        <TextArea fx:id="responseText" editable="false" layoutX="442.0" layoutY="175.0" prefHeight="416.0" prefWidth="337.0" wrapText="true">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextArea>
-                        <TextArea fx:id="myPortfolioText" editable="false" layoutX="419.0" layoutY="155.0" prefHeight="416.0" prefWidth="360.0" wrapText="true">
+                        <TextArea fx:id="myPortfolioText" editable="false" layoutX="41.0" layoutY="175.0" prefHeight="416.0" prefWidth="360.0" wrapText="true">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </TextArea>
-                        <Text layoutX="557.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Account">
+                        <Text layoutX="157.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Account">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Text>
-                        <Text layoutX="148.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lookup Stocks">
+                        <Text layoutX="540.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lookup Stocks">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>

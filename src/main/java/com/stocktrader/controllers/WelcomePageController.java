@@ -6,6 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -13,7 +17,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WelcomePageController {
 
@@ -58,16 +65,54 @@ public class WelcomePageController {
 
     @FXML
     private void getTimeSeries() {
-        String symbol = timeSeriesTextField.getText();
+        String symbol = timeSeriesTextField.getText().toUpperCase();
         String interval;
         try {
             interval = timeSeriesIntervalMenu.getValue();
-            TimeSeries timeSeries = new GetApiResponse().timeSeries(symbol, interval);
-            responseText.setText(timeSeries.toString());
+            List<Value> valueList = new ArrayList<>(new GetApiResponse().timeSeries(symbol, interval).values);
+            final LineChart lineChart = buildChartForTimeSeries(valueList, symbol, interval);
+
+            for (Value v: valueList) {
+                responseText.appendText(String.format("%s : %s\n",v.open(),v.datetime()));
+            }
+
+            Scene scene = new Scene(lineChart, 800, 600);
+            Stage chartStage = new Stage();
+            chartStage.setScene(scene);
+            chartStage.show();
         } catch (Exception e) {
             StocksApplication.showAlert("You must select an interval and enter a valid symbol to lookup a Time-Series");
             e.printStackTrace();
         }
+    }
+
+    private LineChart buildChartForTimeSeries(List<Value> valueList, String symbol, String interval) {
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        final LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        XYChart.Series series = new XYChart.Series();
+        double maxStockPrice = 0D;
+        double minStockPrice = 10000D;
+        xAxis.setLabel("Time");
+        lineChart.setTitle(String.format("Time Series - %s - Interval: %s", symbol, interval));
+        series.setName("Interval: " + interval);
+        lineChart.getYAxis().setAutoRanging(false);
+
+        for (int i = valueList.size() - 1; i >= 0; i--) {
+            double stockPrice = Double.parseDouble(valueList.get(i).open());
+            series.getData().add(new XYChart.Data(valueList.get(i).datetime(), stockPrice));
+
+            if (stockPrice > maxStockPrice)
+                maxStockPrice = stockPrice;
+            if (stockPrice < minStockPrice)
+                minStockPrice = stockPrice;
+        }
+        minStockPrice = Math.floor(minStockPrice);
+        maxStockPrice = Math.ceil(maxStockPrice);
+        yAxis.setLowerBound(minStockPrice);
+        yAxis.setUpperBound(maxStockPrice);
+        lineChart.getData().add(series);
+        return lineChart;
     }
 
     @FXML
