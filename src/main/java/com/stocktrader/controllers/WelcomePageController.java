@@ -107,10 +107,13 @@ public class WelcomePageController {
             if (stockPrice < minStockPrice)
                 minStockPrice = stockPrice;
         }
-        minStockPrice = Math.floor(minStockPrice);
-        maxStockPrice = Math.ceil(maxStockPrice);
+        minStockPrice = Math.floor(minStockPrice/10)*10;
+        maxStockPrice = Math.ceil(maxStockPrice/10)*10;
+        yAxis.setAutoRanging(false);
         yAxis.setLowerBound(minStockPrice);
         yAxis.setUpperBound(maxStockPrice);
+        yAxis.setTickUnit((maxStockPrice-minStockPrice)/10);
+
         lineChart.getData().add(series);
         return lineChart;
     }
