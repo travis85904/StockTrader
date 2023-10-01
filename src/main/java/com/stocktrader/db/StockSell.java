@@ -53,7 +53,7 @@ public class StockSell {
 
     int sharesLeftAfterSale(String symbol, int orderAmount) {
         for (Stock s : stockList) {
-            if (s.getSymbol().equals(symbol)) {
+            if (s.getSymbol() != null && s.getSymbol().equals(symbol)) {
                 symbolIndex = stockList.indexOf(s);
                 return s.getShares() - orderAmount;
             }
