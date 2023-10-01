@@ -4,7 +4,7 @@ This is now a functioning application which includes: new user registration, log
 In order to get the project running you will need to make a few changes to the source.
 
 1. (API)
-In com.stocktrader.api.GetApiConnection.getApiKey() you will need to add your own api key which you can do by 
+In com.stocktrader.api.GetApiResponse.getApiKey() you will need to add your own api key which you can do by 
 making a config.properties file and adding the api.key value.
 
 You could also simply modify the method to just return your API key as a String directly from the method.
